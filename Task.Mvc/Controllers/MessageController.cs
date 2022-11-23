@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +16,10 @@ public class MessageController : Controller
         _mediator = mediator;
     }
 
-    public async Task<IActionResult> Index(string username)
+    public async Task<IActionResult> Index()
     {
+        var username = User.FindFirst("Username")?.Value;
+        
         var query = new GetMessageListQuery { Name = username };
         var result = await _mediator.Send(query);
 

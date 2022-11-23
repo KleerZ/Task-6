@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Task.Application.Common.Interfaces;
 
 namespace Task.Application.CommandQueries.Message.Queries.GetAll;
@@ -15,8 +16,9 @@ public class GetMessageListQueryHandler : IRequestHandler<GetMessageListQuery, M
     public async Task<MessagesListVm> Handle(GetMessageListQuery request,
         CancellationToken cancellationToken)
     {
-        var user = _context.Users
-            .FirstOrDefault(u => u.Name == request.Name);
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Name == request.Name,
+                cancellationToken: cancellationToken);
 
         if (user is null)
             return new MessagesListVm
