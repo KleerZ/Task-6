@@ -1,9 +1,11 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task.Application.CommandQueries.Message.Queries.GetAll;
 
 namespace Task.Mvc.Controllers;
 
+[Authorize]
 public class MessageController : Controller
 {
     private readonly IMediator _mediator;

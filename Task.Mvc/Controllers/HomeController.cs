@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using System.Security.Claims;
+using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Task.Application.CommandQueries.User.Queries.Login;
+using Task.Application.CommandQueries.User.Commands.Login;
 using Task.Mvc.Models;
 
 namespace Task.Mvc.Controllers;
@@ -26,9 +29,12 @@ public class HomeController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        var query = new UserLoginQuery { Name = model.Name };
-        var username = await _mediator.Send(query);
+        var command = new UserLoginCommand { Name = model.Name };
+        var identity = await _mediator.Send(command);
 
-        return RedirectToAction("Index", "Message", username);
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, 
+            new ClaimsPrincipal(identity));
+
+        return RedirectToAction("Index", "Message");
     }
 }
