@@ -30,3 +30,40 @@ body {
   align-items: center;
   height: 90%
 }
+
+#floatingTextarea{
+  max-height: 450px;
+}
+
+.accordion-flush{
+  border: 1px solid #cbcbcb;
+  border-radius: 5px;
+  /*padding: 5px;*/
+}
+
+.message{
+  border: 1px solid #cbcbcb;
+  border-radius: 5px;
+  padding: 10px 25px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.mail-container{
+  height: 650px;
+  overflow-y: scroll;
+}
+
+.message-title{
+  font-size: 19px;
+}
+
+.message-body{
+  visibility: hidden;
+  height: 0;
+}
+
+.modal-body{
+  overflow-y: scroll;
+  max-height: 400px;
+}
