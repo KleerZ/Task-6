@@ -33,6 +33,6 @@ public class MessageController : Controller
         var query = new GetUserNameListQuery();
         var result = await _mediator.Send(query);
 
-        return Ok(result.UserNames);
+        return Ok(result.UserNames.ToList());
     }
 }
