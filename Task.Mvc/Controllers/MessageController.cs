@@ -1,8 +1,8 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task.Application.CommandQueries.Message.Queries.GetAll;
+using Task.Application.CommandQueries.User.Queries;
 
 namespace Task.Mvc.Controllers;
 
@@ -26,5 +26,13 @@ public class MessageController : Controller
         var messages = result.Messages.ToList();
         
         return View(messages);
+    }
+
+    public async Task<IActionResult> GetUserNames()
+    {
+        var query = new GetUserNameListQuery();
+        var result = await _mediator.Send(query);
+
+        return Ok(result.UserNames.ToList());
     }
 }

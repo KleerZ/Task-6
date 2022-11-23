@@ -1,10 +1,10 @@
-@using MessagesListVm = Task.Application.CommandQueries.Message.Queries.GetAll.MessagesListVm
 @using Message = Task.Domain.Message
 @model List<Message>
 
 @{
-    ViewData["Title"] = "Messages";
+    ViewData["Title"] = $"Messages - {User.FindFirst("Username")?.Value}";
 }
+
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -24,7 +24,10 @@
             </div>
 
         </div>
-      <div class="modal-body" id="modal-body"> </div>
+        <div class="modal-body" id="modal-body">
+            
+            
+        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
@@ -37,16 +40,16 @@
     <div class="row">
         <div class="col-sm send-container mb-3">
             <div class="col fw-bold fs-3 mb-3">Send a message</div>
-            <form action="">
+            <form autocomplete="off" action="">
                 <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="Recipient">
+                    <div class="form-floating mb-3 autocomplete">
+                        <input type="text" class="form-control recipient-input" id="floatingInput" placeholder="Recipient">
                         <label for="floatingInput">Recipient</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" placeholder="Title">
+                        <input type="text" class="form-control" placeholder="Title">
                         <label for="floatingInput">Title</label>
                     </div>
                 </div>
@@ -81,6 +84,5 @@
     </div>
 </div>
 
-@* <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"> *@
-@*     ... *@
-@* </div> *@
+<script src="~/js/message.js"></script>
+<script src="~/js/autocomplete.js"></script>
