@@ -4,7 +4,7 @@ namespace Task.Mvc.Controllers;
 
 public class MessageController : Controller
 {
-    public IActionResult Index()
+    public IActionResult Index(string username)
     {
         return View();
     }

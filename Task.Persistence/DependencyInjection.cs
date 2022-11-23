@@ -10,7 +10,7 @@ public static class DependencyInjection
     public static IServiceCollection AddPersistence(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = "";
+        var connectionString = configuration["DbConnection"];
         
         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             connectionString = configuration["ProductionDbConnection"];
