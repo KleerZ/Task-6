@@ -63,7 +63,11 @@ body {
   height: 0;
 }
 
-.modal-body{
+#modal-body{
   overflow-y: scroll;
   max-height: 400px;
+}
+
+.valid-error{
+  color: red;
 }
