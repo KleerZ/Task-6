@@ -1,4 +1,6 @@
-@model dynamic
+@using MessagesListVm = Task.Application.CommandQueries.Message.Queries.GetAll.MessagesListVm
+@using Message = Task.Domain.Message
+@model List<Message>
 
 @{
     ViewData["Title"] = "Messages";
@@ -60,25 +62,14 @@
             <div class="col fw-bold fs-3 mb-3">All messages</div>
 
             <div class="mail-container">
-                @for (int i = 0; i < 500; i++)
+                @foreach (var message in Model)
                 {
                     <div class="col message" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <div class="row message-title">Title: @i</div>
-                        <div class="row message-sender">Sender: Somebody</div>
-                        <div class="row message-date">Date: 23.11.2022 16:48</div>
+                        <div class="row message-title">Title: @message.Title</div>
+                        <div class="row message-sender">Sender: @message.Sender</div>
+                        <div class="row message-date">Date: @message.Date</div>
                         <div class="row message-body">
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
-                            fffffffffffffffffffffffffffffffffffff
+                            @message.Body
                         </div>
                     </div>
                 }
