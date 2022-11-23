@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Task.Application.CommandQueries.User.Queries.Login;
 using Task.Mvc.Models;
