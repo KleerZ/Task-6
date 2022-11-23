@@ -1,0 +1,97 @@
+@model dynamic
+
+@{
+    ViewData["Title"] = "Mail";
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="col">
+
+                <div class="row">
+                    <h2 class="modal-title fs-5" id="modal-title">Title:</h2>
+                </div>
+                <div class="row">
+                    <h2 class="modal-title fs-6" id="modal-date">Date:</h2>
+                </div>
+                <div class="row">
+                    <h2 class="modal-title fs-6" id="modal-sender">Sender:</h2>
+                </div>
+            </div>
+
+        </div>
+      <div class="modal-body" id="modal-body"> </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm send-container mb-3">
+            <div class="col fw-bold fs-3 mb-3">Send a message</div>
+            <form action="">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="Recipient">
+                        <label for="floatingInput">Recipient</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" placeholder="Title">
+                        <label for="floatingInput">Title</label>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <textarea maxlength="2398" class="form-control" placeholder="Body" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Body</label>
+                </div>
+                <button type="button" class="btn btn-lg btn-primary mt-2">Send</button>
+            </form>
+        </div>
+
+        <div class="col-md">
+            <div class="col fw-bold fs-3 mb-3">All messages</div>
+
+            <div class="mail-container">
+                @for (int i = 0; i < 500; i++)
+                {
+                    <div class="col message" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="row message-title">Title: @i</div>
+                        <div class="row message-sender">Sender: Somebody</div>
+                        <div class="row message-date">Date: 23.11.2022 16:48</div>
+                        <div class="row message-body">
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                            fffffffffffffffffffffffffffffffffffff
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+@* <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"> *@
+@*     ... *@
+@* </div> *@
