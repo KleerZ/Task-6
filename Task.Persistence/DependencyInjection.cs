@@ -10,17 +10,18 @@ public static class DependencyInjection
     public static IServiceCollection AddPersistence(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration["DbConnection"];
+        var connectionString = "";
         
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-            connectionString = configuration["ProductionDbConnection"];
-        else
-            connectionString = configuration["DbConnection"];
+        connectionString = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production"
+            ? configuration["ProductionDbConnection"]
+            : configuration["DevelopDbConnection"];
 
         services.AddDbContext<ApplicationContext>(options =>
         {
             options.UseNpgsql(connectionString);
         });
+        
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         services.AddScoped<IApplicationContext, ApplicationContext>();
 

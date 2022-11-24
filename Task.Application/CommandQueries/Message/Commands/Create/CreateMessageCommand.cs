@@ -1,13 +1,11 @@
-namespace Task.Domain;
+using MediatR;
 
-public class Message
+namespace Task.Application.CommandQueries.Message.Commands.Create;
+
+public class CreateMessageCommand : IRequest<MessageDto>
 {
-    public int Id { get; set; }
     public string? Sender { get; set; }
     public string Recipient { get; set; }
-    public DateTime Date { get; set; }
     public string Title { get; set; }
     public string Body { get; set; }
-
-    public User? User { get; set; }
 }

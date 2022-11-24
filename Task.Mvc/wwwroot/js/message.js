@@ -1,12 +1,21 @@
-let messages = document.getElementsByClassName('message')
-for (let i = 0; i < messages.length; i++) {
-    messages[i].addEventListener("click", function (e){
-        e.preventDefault();
-        showMessage(messages[i])
+const hub =  new signalR.HubConnectionBuilder()
+    .withUrl("/chat")
+    .build();
+
+window.onload = async () => {
+    await hub.start()
+
+    console.log(await getConnectionId())
+    await fetch("Message/SetConnectionId?connectionId=" + await getConnectionId(), {
+        method: 'POST',
+        body: JSON.stringify(),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
 }
 
-function showMessage(element){
+function showMessage(element) {
     let title = element.getElementsByClassName('message-title')[0].innerHTML;
     let sender = element.getElementsByClassName('message-sender')[0].innerHTML;
     let date = element.getElementsByClassName('message-date')[0].innerHTML;
@@ -23,7 +32,7 @@ function showMessage(element){
     modalBody.innerHTML = body
 }
 
-async function getUserNames(){
+async function getUserNames() {
     let response = await fetch("Message/GetUserNames/", {
         method: 'POST',
         body: JSON.stringify(),
@@ -35,3 +44,53 @@ async function getUserNames(){
     return response.json()
 }
 
+let sendBtn = document.getElementById('send-btn')
+sendBtn.addEventListener("click", async () => {
+    let recipient = document.getElementsByClassName("recipient-input")[0];
+    let title = document.getElementById("send-title");
+    let body = document.getElementsByClassName("send-body")[0];
+    let sender = document.getElementById("current-user");
+
+    if (recipient.value !== "" && title.value !== "" && body.value !== ""){
+        hub.invoke("Send", sender.value, body.value, recipient.value, title.value)
+            .catch(function (exception) {
+                showError("The user is not exists")
+            });
+
+        clearAllFields()
+    }
+    else{
+        showError("Fill in all the fields")
+    }
+})
+
+async function getConnectionId(){
+    return hub.connection.connectionId
+}
+
+function clearAllFields(){
+    let recipient = document.getElementsByClassName("recipient-input")[0];
+    let title = document.getElementById("send-title");
+    let body = document.getElementsByClassName("send-body")[0];
+
+    recipient.value = ""
+    title.value = ""
+    body.value = ""
+}
+
+hub.on('Send', function (message) {
+    addMessageToList(message)
+});
+
+function showError(message){
+    let errorContainer = document.querySelector(".error-container")
+    
+    let html = `
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div>${message}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `
+    
+    errorContainer.innerHTML += html
+}

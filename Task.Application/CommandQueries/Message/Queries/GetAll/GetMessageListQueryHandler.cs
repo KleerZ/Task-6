@@ -26,7 +26,9 @@ public class GetMessageListQueryHandler : IRequestHandler<GetMessageListQuery, M
                 Messages = new List<Domain.Message>()
             };
 
-        var messages = _context.Messages.Where(m => m.User.Id == user.Id);
+        var messages = _context.Messages
+            .Where(m => m.User.Id == user.Id)
+            .OrderByDescending(m => m.Date);
 
         return new MessagesListVm { Messages = messages };
     }
