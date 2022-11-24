@@ -30,7 +30,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, ClaimsI
         
         var claims = new List<Claim>
         {
-            new("Username", user.Name),
+            new(ClaimTypes.NameIdentifier, user.Name),
         };
 
         var claimsIdentity = new ClaimsIdentity(claims, "ApplicationCookie", 

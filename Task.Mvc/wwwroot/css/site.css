@@ -47,9 +47,10 @@ body {
   padding: 10px 25px;
   cursor: pointer;
   margin-bottom: 10px;
+  transition: .2s all linear;
 }
 
-.mail-container{
+.message-container{
   height: 650px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -119,4 +120,13 @@ input[type=submit] {
 .autocomplete-active {
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+.new-message{
+  border: 3px solid green;
+}
+
+.error-container{
+  max-height: 350px;
+  overflow-y: auto; 
 }
