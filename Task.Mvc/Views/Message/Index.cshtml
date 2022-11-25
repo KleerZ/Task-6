@@ -68,10 +68,10 @@
             <div class="message-container">
                 @foreach (var message in Model)
                 {
-                    <div class="col message" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <div class="col message" onclick="showMessage(this)" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <div class="row message-title">Title: @message.Title</div>
                         <div class="row message-sender">Sender: @message.Sender</div>
-                        <div class="row message-date">Date: @message.Date.ToString("MM/dd/yyyy H:mm")</div>
+                        <div class="row message-date">Date: @message.Date.ToString("MM.dd.yyyy H:mm")</div>
                         <div class="row message-body">
                             @message.Body
                         </div>

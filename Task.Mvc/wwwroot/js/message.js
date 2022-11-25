@@ -4,15 +4,6 @@ const hub =  new signalR.HubConnectionBuilder()
 
 window.onload = async () => {
     await hub.start()
-
-    console.log(await getConnectionId())
-    await fetch("Message/SetConnectionId?connectionId=" + await getConnectionId(), {
-        method: 'POST',
-        body: JSON.stringify(),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
 }
 
 function showMessage(element) {
@@ -63,10 +54,6 @@ sendBtn.addEventListener("click", async () => {
         showError("Fill in all the fields")
     }
 })
-
-async function getConnectionId(){
-    return hub.connection.connectionId
-}
 
 function clearAllFields(){
     let recipient = document.getElementsByClassName("recipient-input")[0];

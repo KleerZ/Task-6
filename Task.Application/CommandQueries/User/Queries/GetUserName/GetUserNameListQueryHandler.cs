@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Task.Application.Common.Interfaces;
 
-namespace Task.Application.CommandQueries.User.Queries;
+namespace Task.Application.CommandQueries.User.Queries.GetUserName;
 
 public class GetUserNameListQueryHandler : IRequestHandler<GetUserNameListQuery, UserNameListVm>
 {

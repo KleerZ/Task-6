@@ -31,7 +31,7 @@ public class CreateMessageCommandHandler : IRequestHandler<CreateMessageCommand,
             Title = request.Title,
             Body = request.Body,
             Sender = request.Sender,
-            Date = DateTime.Now,
+            Date = DateTimeOffset.Now.DateTime.AddHours(3),
             User = user
         };
 
