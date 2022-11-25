@@ -16,9 +16,10 @@ function addMessageToList(message) {
     `;
     
     let allMessages = messageContainer.innerHTML
-    messageContainer.innerHTML = ""
-    messageContainer.innerHTML += messageHtml
-    messageContainer.innerHTML += allMessages
+    
+    messageHtml += allMessages
+    
+    messageContainer.innerHTML = messageHtml
 }
 
 function removeMessageHighlight(element){

@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task.Application.CommandQueries.Message.Queries.GetAll;
-using Task.Application.CommandQueries.User.Commands.UpdateConnectionId;
 using Task.Application.CommandQueries.User.Queries.GetUserName;
 
 namespace Task.Mvc.Controllers;
@@ -38,18 +37,5 @@ public class MessageController : Controller
         var result = await _mediator.Send(query);
 
         return Ok(result.UserNames.ToList());
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> SetConnectionId(string connectionId)
-    {
-        var command = new UpdateConnectionIdCommand
-        {
-            Name = User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
-            ConnectionId = connectionId
-        };
-        await _mediator.Send(command);
-        
-        return Ok();
     }
 }
